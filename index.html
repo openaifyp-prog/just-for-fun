@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>An Enchanted Rose For You</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body class="not-loaded">
+  <div id="glow-overlay"></div>
+
+  <main class="scene">
+    <div class="flowers" id="rose-trigger">
+      <div class="flower flower--main">
+        <div class="flower__leafs">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+        </div>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+          <div class="flower__line__leaf flower__line__leaf--5"></div>
+          <div class="flower__line__leaf flower__line__leaf--6"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="love-note" id="note">
+      <div id="poem-wrapper">
+        <p class="poem-line"></p>
+      </div>
+      <div id="final-message" style="display: none;">
+        <h1 class="reveal-fade">Happy Rose Day</h1>
+        <div class="divider"></div>
+        <p class="reveal-fade cursive">"To the most beautiful bloom in my life."</p>
+        <p class="reveal-fade body">Just as these petals unfold, my love for you grows with every passing moment.</p>
+      </div>
+    </div>
+  </main>
+
+  <div class="instruction-text">Touch the heart of the rose</div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
