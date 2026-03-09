@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grimhold — Tower Defense</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <div class="header-content">
+                <h1>GRIMHOLD</h1>
+                <div class="stats-row">
+                    <div class="stat"><span class="stat-label">GOLD</span><span id="gold-count" class="stat-value gold-text">300</span></div>
+                    <div class="stat"><span class="stat-label">WAVE</span><span id="wave-number" class="stat-value">—</span></div>
+                    <div class="stat"><span class="stat-label">LIVES</span><span id="lives-count" class="stat-value lives-text">20</span></div>
+                    <div class="stat"><span class="stat-label">SCORE</span><span id="score-count" class="stat-value">0</span></div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <canvas id="gameCanvas"></canvas>
+
+            <!-- Tower Info Panel -->
+            <div id="tower-info" class="tower-info hidden">
+                <div class="info-header">
+                    <span id="info-name">Tower</span>
+                    <span id="info-level" class="info-level">Lv1</span>
+                </div>
+                <div class="info-stats">
+                    <span>DMG: <b id="info-dmg">0</b></span>
+                    <span>RNG: <b id="info-rng">0</b></span>
+                    <span>SPD: <b id="info-spd">0</b></span>
+                </div>
+                <div class="info-actions">
+                    <button id="upgrade-btn" class="action-btn upgrade-btn">⬆ UPGRADE (<span id="upgrade-cost">0</span>g)</button>
+                    <button id="sell-btn" class="action-btn sell-btn">💰 SELL (<span id="sell-value">0</span>g)</button>
+                </div>
+            </div>
+
+            <!-- Bottom HUD -->
+            <div id="hud">
+                <div class="tower-shop">
+                    <button class="tower-btn" data-tower="archer">
+                        <div class="tooltip">
+                            <div class="tip-header">🏹 Archer Tower</div>
+                            <div class="tip-desc">Rapid arrows pick off individual targets</div>
+                            <div class="tip-stats"><span>DMG: 10</span><span>RNG: 130</span><span>SPD: Fast</span></div>
+                            <div class="tip-ability">⚡ Single target, high fire rate</div>
+                        </div>
+                        <span class="tower-icon">🏹</span>
+                        <span class="tower-name">Archer</span>
+                        <span class="tower-cost">50g</span>
+                    </button>
+                    <button class="tower-btn" data-tower="mage">
+                        <div class="tooltip">
+                            <div class="tip-header">🔮 Mage Tower</div>
+                            <div class="tip-desc">Arcane blasts damage all nearby foes</div>
+                            <div class="tip-stats"><span>DMG: 20</span><span>RNG: 110</span><span>SPD: Slow</span></div>
+                            <div class="tip-ability">💥 Area splash damage</div>
+                        </div>
+                        <span class="tower-icon">🔮</span>
+                        <span class="tower-name">Mage</span>
+                        <span class="tower-cost">100g</span>
+                    </button>
+                    <button class="tower-btn" data-tower="frost">
+                        <div class="tooltip">
+                            <div class="tip-header">❄️ Frost Tower</div>
+                            <div class="tip-desc">Chilling blasts slow enemy movement</div>
+                            <div class="tip-stats"><span>DMG: 5</span><span>RNG: 100</span><span>SPD: Med</span></div>
+                            <div class="tip-ability">🧊 Slows targets by 40%</div>
+                        </div>
+                        <span class="tower-icon">❄️</span>
+                        <span class="tower-name">Frost</span>
+                        <span class="tower-cost">75g</span>
+                    </button>
+                    <button class="tower-btn" data-tower="cannon">
+                        <div class="tooltip">
+                            <div class="tip-header">💣 Cannon Tower</div>
+                            <div class="tip-desc">Devastating explosions crush armored foes</div>
+                            <div class="tip-stats"><span>DMG: 45</span><span>RNG: 160</span><span>SPD: V.Slow</span></div>
+                            <div class="tip-ability">💥 Heavy AoE bombardment</div>
+                        </div>
+                        <span class="tower-icon">💣</span>
+                        <span class="tower-name">Cannon</span>
+                        <span class="tower-cost">150g</span>
+                    </button>
+                    <button class="tower-btn" data-tower="poison">
+                        <div class="tooltip">
+                            <div class="tip-header">☠️ Poison Tower</div>
+                            <div class="tip-desc">Toxic venom eats away at enemies over time</div>
+                            <div class="tip-stats"><span>DMG: 3+DoT</span><span>RNG: 110</span><span>SPD: Med</span></div>
+                            <div class="tip-ability">🧪 Damage over time effect</div>
+                        </div>
+                        <span class="tower-icon">☠️</span>
+                        <span class="tower-name">Poison</span>
+                        <span class="tower-cost">125g</span>
+                    </button>
+                    <button class="tower-btn" data-tower="holy">
+                        <div class="tooltip">
+                            <div class="tip-header">✝️ Holy Tower</div>
+                            <div class="tip-desc">Sacred light smites unholy creatures</div>
+                            <div class="tip-stats"><span>DMG: 25</span><span>RNG: 140</span><span>SPD: Med</span></div>
+                            <div class="tip-ability">🌟 2x damage vs undead &amp; demons</div>
+                        </div>
+                        <span class="tower-icon">✝️</span>
+                        <span class="tower-name">Holy</span>
+                        <span class="tower-cost">200g</span>
+                    </button>
+                </div>
+                <button id="next-wave-btn" class="wave-btn">SEND WAVE</button>
+            </div>
+        </main>
+
+        <!-- START SCREEN -->
+        <div id="start-screen" class="overlay active">
+            <div class="card">
+                <h2>Grimhold</h2>
+                <p>A dark horde threatens the kingdom. Lead the defense across three battlefields, each more dangerous than the last.</p>
+                <button id="start-btn" class="card-btn">BEGIN CAMPAIGN</button>
+            </div>
+        </div>
+
+        <!-- LEVEL INTRO -->
+        <div id="level-screen" class="overlay">
+            <div class="card">
+                <div class="level-badge" id="level-num">Level 1 of 3</div>
+                <h2 id="level-name">Greenwood Pass</h2>
+                <p id="level-desc">The horde marches through the forest valleys. Hold the pass!</p>
+                <button id="level-start-btn" class="card-btn">ENTER BATTLE</button>
+            </div>
+        </div>
+
+        <!-- GAME OVER -->
+        <div id="game-over-screen" class="overlay">
+            <div class="card">
+                <h2>Grimhold Has Fallen</h2>
+                <p>Defeated at <b id="final-level">—</b> on wave <b id="final-wave">0</b>.<br>Final Score: <b id="final-score">0</b></p>
+                <button onclick="location.reload()" class="card-btn">TRY AGAIN</button>
+            </div>
+        </div>
+
+        <!-- VICTORY -->
+        <div id="victory-screen" class="overlay">
+            <div class="card victory-card">
+                <h2>VICTORY!</h2>
+                <p>You have defended Grimhold across all three battlefields. The kingdom stands.<br>Final Score: <b id="victory-score">0</b></p>
+                <button onclick="location.reload()" class="card-btn">PLAY AGAIN</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

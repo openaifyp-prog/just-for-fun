@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Royale | Premium Puzzle Experience</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1 class="logo">Sudoku Royale</h1>
+            <div class="game-stats">
+                <div class="stat-item">
+                    <span class="stat-label">TIME</span>
+                    <span id="timer" class="stat-value">00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">MISTAKES</span>
+                    <span id="mistakes" class="stat-value">0/3</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="board-container">
+                <div id="sudoku-board" class="sudoku-board">
+                    <!-- JS will populate cells -->
+                </div>
+            </div>
+
+            <div class="controls-container">
+                <div class="number-pad">
+                    <button class="num-btn" data-value="1">1</button>
+                    <button class="num-btn" data-value="2">2</button>
+                    <button class="num-btn" data-value="3">3</button>
+                    <button class="num-btn" data-value="4">4</button>
+                    <button class="num-btn" data-value="5">5</button>
+                    <button class="num-btn" data-value="6">6</button>
+                    <button class="num-btn" data-value="7">7</button>
+                    <button class="num-btn" data-value="8">8</button>
+                    <button class="num-btn" data-value="9">9</button>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="erase-btn" class="action-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 20H7L3 16C2 15 2 13 3 12L13 2L22 11L20 20Z" />
+                            <path d="M18 11L11 18" />
+                        </svg>
+                        Erase
+                    </button>
+                    <button id="hint-btn" class="action-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9.663 17h4.674M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.543 2.22a1 1 0 01-.97.78H10.27a1 1 0 01-.97-.78L8.757 16.243z" />
+                        </svg>
+                        Hint (<span id="hint-count">3</span>)
+                    </button>
+                    <button id="show-difficulty-btn" class="action-btn primary">New Game</button>
+                </div>
+            </div>
+        </main>
+
+        <div id="difficulty-modal" class="modal">
+            <div class="modal-content">
+                <h2>Select Difficulty</h2>
+                <p>Choose your challenge level</p>
+                <div class="difficulty-options">
+                    <button class="diff-btn" data-level="easy">Easy</button>
+                    <button class="diff-btn" data-level="medium">Medium</button>
+                    <button class="diff-btn" data-level="hard">Hard</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="win-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Exquisite!</h2>
+                <p>You've mastered this puzzle.</p>
+                <div class="final-stats">
+                    <div class="final-stat">
+                        <span class="label">Time</span>
+                        <span id="final-time" class="value">00:00</span>
+                    </div>
+                </div>
+                <button id="modal-new-game" class="modal-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

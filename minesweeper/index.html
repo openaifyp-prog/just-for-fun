@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper Elite | Premium Puzzle Experience</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1 class="logo">Minesweeper Elite</h1>
+            <div class="game-stats">
+                <div class="stat-item">
+                    <span class="stat-label">TIME</span>
+                    <span id="timer" class="stat-value">00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">MINES</span>
+                    <span id="mine-count" class="stat-value">00</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div id="game-board-container" class="board-container">
+                <div id="minesweeper-board" class="minesweeper-board">
+                    <!-- JS will populate cells -->
+                </div>
+            </div>
+
+            <div class="controls-container">
+                <div class="action-buttons">
+                    <button id="flag-mode-btn" class="action-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                            <line x1="4" y1="22" x2="4" y2="15" />
+                        </svg>
+                        Flag Mode: OFF
+                    </button>
+                    <button id="show-difficulty-btn" class="action-btn primary">New Game</button>
+                </div>
+            </div>
+        </main>
+
+        <div id="difficulty-modal" class="modal">
+            <div class="modal-content">
+                <h2>Select Difficulty</h2>
+                <p>Choose your challenge level</p>
+                <div class="difficulty-options">
+                    <button class="diff-btn" data-level="easy">Easy (10x10)</button>
+                    <button class="diff-btn" data-level="medium">Medium (16x16)</button>
+                    <button class="diff-btn" data-level="hard">Hard (22x22)</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="win-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Outstanding!</h2>
+                <p>You've safely cleared the field.</p>
+                <div class="final-stats">
+                    <div class="final-stat">
+                        <span class="label">Total Time</span>
+                        <span id="final-time" class="value">00:00</span>
+                    </div>
+                </div>
+                <button id="modal-new-game" class="modal-btn">Play Again</button>
+            </div>
+        </div>
+
+        <div id="game-over-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Detonated!</h2>
+                <p>Better luck next time, Commander.</p>
+                <button id="modal-retry" class="modal-btn">Try Again</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

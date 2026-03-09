@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Royale | Elite Strategy Experience</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1 class="logo">Chess Royale</h1>
+            <div class="game-status">
+                <div class="turn-indicator" id="turn-indicator">
+                    <span class="status-dot"></span>
+                    <span id="current-turn-text">WHITE'S TURN</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="board-container">
+                <div id="chess-board" class="chess-board">
+                    <!-- JS will populate squares and pieces -->
+                </div>
+            </div>
+
+            <div class="side-panel">
+                <div class="captured-pieces" id="captured-white">
+                    <!-- Captured white pieces -->
+                </div>
+                <div class="move-history" id="move-history">
+                    <h3>Move History</h3>
+                    <div class="history-list" id="history-list"></div>
+                </div>
+                <div class="captured-pieces" id="captured-black">
+                    <!-- Captured black pieces -->
+                </div>
+
+                <div class="controls-container">
+                    <button id="reset-btn" class="action-btn primary">Reset Board</button>
+                    <button id="undo-btn" class="action-btn">Undo Move</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Piece SVGs (Hidden templates) -->
+    <div style="display: none;">
+        <!-- SVGs will be injected via JS or referenced -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

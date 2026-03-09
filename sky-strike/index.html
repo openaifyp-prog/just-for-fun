@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Strike Elite | High-Octane Jet Combat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-wrapper">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="ui-layer">
+            <div class="hud container">
+                <div class="hud-item health">
+                    <span class="label">ARMOR</span>
+                    <div class="bar-container">
+                        <div id="health-bar" class="bar primary"></div>
+                    </div>
+                </div>
+                <div class="hud-item score">
+                    <span class="label">SCORE</span>
+                    <span id="score-value" class="value">000,000</span>
+                </div>
+                <div class="hud-item speed">
+                    <span class="label">SPEED</span>
+                    <span id="speed-value" class="value">MACH 1.0</span>
+                </div>
+                <div class="hud-item combo">
+                    <span class="label">COMBO</span>
+                    <span id="combo-multiplier" class="value">x1</span>
+                </div>
+                <div class="hud-item bombs">
+                    <span class="label">BOMBS</span>
+                    <div id="bomb-icons" class="icon-row">
+                        <span class="bomb-icon"></span>
+                        <span class="bomb-icon"></span>
+                        <span class="bomb-icon"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="start-screen" class="overlay active">
+                <h1 class="logo">SKY STRIKE<br><span class="accent">ELITE</span></h1>
+                <p class="subtitle">PREMIUM JET COMBAT EXPERIENCE</p>
+                <div class="controls-hint">
+                    WASD / ARROWS to Fly • SPACE to Fire
+                </div>
+                <button id="start-btn" class="glow-btn">INITIATE MISSION</button>
+            </div>
+
+            <div id="game-over-screen" class="overlay">
+                <h2 class="status">MISSION FAILED</h2>
+                <div class="final-stats">
+                    <p>TOTAL SCORE: <span id="final-score">0</span></p>
+                </div>
+                <button id="restart-btn" class="glow-btn">RE-ACQUIRE TARGET</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
