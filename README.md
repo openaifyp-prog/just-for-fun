@@ -32,12 +32,33 @@ A high-octane vertical jet fighter game with fluid physics and premium effects.
 - **Folder**: `sky-strike/`
 - **Tech**: HTML5 Canvas, CSS, JavaScript
 
-### 5. Aegis Engine
+### 5. Grimhold
 
-A premium Steampunk Tower Defense game with mechanical logic and industrial aesthetics.
+A dark fantasy tower defense game with a 3-level campaign, upgradable towers, and boss waves.
 
 - **Folder**: `aegis-engine/`
 - **Tech**: HTML5 Canvas, CSS, JavaScript
+
+### 6. Fluid Simulation
+
+Interactive 2D fluid dynamics — paint with colored smoke that flows and swirls in real-time using GPU shaders.
+
+- **Folder**: `fluid-sim/`
+- **Tech**: WebGL2 GLSL Shaders, HTML5 Canvas, JavaScript
+
+### 7. Silk
+
+Hypnotic 3D motion graphics where glowing ribbons flow like silk in water. Features premium spline physics and velvet-like GPU shaders.
+
+- **Folder**: `silk-motion/`
+- **Tech**: WebGL2 (Raw), GLSL Shaders, HTML5 Canvas, JavaScript
+
+### 8. 2048 Elite
+
+A premium, high-end version of the classic puzzle game. Features glassmorphism aesthetics, metallic gradients, and tactile "tilt" board animations.
+
+- **Folder**: `2048-elite/`
+- **Tech**: HTML, CSS, JavaScript
 
 ---
 

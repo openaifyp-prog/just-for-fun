@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluid — Interactive Simulation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <!-- Premium glassmorphism controls -->
+    <div id="controls">
+        <div class="ctrl-title">FLUID DYNAMICS</div>
+        
+        <div class="ctrl-row">
+            <label>Color</label>
+            <input type="color" id="dye-color" value="#ff4444">
+        </div>
+
+        <div class="ctrl-row">
+            <label>Presets</label>
+            <select id="presets">
+                <option value="default">Liquid Fire</option>
+                <option value="electric">Neon Electric</option>
+                <option value="ink">Midnight Ink</option>
+                <option value="nebula">Deep Nebula</option>
+            </select>
+        </div>
+
+        <div class="ctrl-row">
+            <label>Brush Size</label>
+            <input type="range" id="brush-size" min="10" max="150" value="40">
+        </div>
+
+        <div class="ctrl-row">
+            <label>Viscosity</label>
+            <input type="range" id="viscosity" min="0" max="100" value="0">
+        </div>
+
+        <div class="ctrl-row">
+            <label>Vorticity</label>
+            <input type="range" id="curl" min="0" max="100" value="35">
+        </div>
+
+        <div class="ctrl-row">
+            <label>Visual Mode</label>
+            <select id="display-mode">
+                <option value="dye">Luminous Dye</option>
+                <option value="velocity">Flow Velocity</option>
+                <option value="pressure">Fluid Pressure</option>
+            </select>
+        </div>
+
+        <div class="ctrl-actions">
+            <button id="btn-clear">CLEAR</button>
+            <button id="btn-rainbow">RAINBOW</button>
+        </div>
+
+        <div class="ctrl-hint">Use multiple fingers to paint</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+/* ============================================
+   2048 ELITE — Premium Light Theme Overhaul
+   Pearl, Ivory, and Slate — Modern Minimalism
+   ============================================ */
+
+:root {
+    --bg: #fdfdfd;
+    --board-bg: #f4f1ea; /* Soft Ivory */
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --border: rgba(0, 0, 0, 0.05);
+    --gold: #d4af37; /* Metallic Gold */
+    --text: #2c2c2c; /* Slate Charcoal */
+    --text-dim: #7a7a7a;
+    --tile-blur: blur(20px);
+    
+    /* Premium Light Palette */
+    --t2: linear-gradient(135deg, #ffffff, #f5f5f5);
+    --t4: linear-gradient(135deg, #fafafa, #eeeeee);
+    --t8: linear-gradient(135deg, #fff9c4, #fff176); /* Soft Lemon */
+    --t16: linear-gradient(135deg, #ffe0b2, #ffcc80); /* Peach */
+    --t32: linear-gradient(135deg, #ffccbc, #ffab91); /* Coral */
+    --t64: linear-gradient(135deg, #ef9a9a, #e57373); /* Rose */
+    --t128: linear-gradient(135deg, #b3e5fc, #81d4fa); /* Sky */
+    --t256: linear-gradient(135deg, #b2dfdb, #80cbc4); /* Mint */
+    --t512: linear-gradient(135deg, #d1c4e9, #b39ddb); /* Lavender */
+    --t1024: linear-gradient(135deg, #f5f5f5, #e0e0e0); /* Platinum */
+    --t2048: linear-gradient(135deg, #2c2c2c, #1a1a1a); /* Dark Slate (The Goal) */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+    background-color: var(--bg);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0, 0, 0, 0.02) 0px, transparent 50%);
+    color: var(--text);
+    font-family: 'Outfit', 'Inter', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#app {
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    max-height: 900px;
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    gap: 32px;
+}
+
+/* === HUD === */
+#hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.brand h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+.brand h1 span {
+    display: block;
+    font-size: 1rem;
+    letter-spacing: 8px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-top: -10px;
+}
+
+.scores {
+    display: flex;
+    gap: 16px;
+}
+
+.score-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    padding: 10px 24px;
+    border-radius: 16px;
+    text-align: center;
+    min-width: 100px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.score-card .label {
+    display: block;
+    font-size: 0.70rem;
+    font-weight: 800;
+    color: var(--text-dim);
+    letter-spacing: 1.5px;
+}
+
+.score-card .value {
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+#score-addition {
+    position: absolute;
+    top: -20px; left: 0; width: 100%;
+    text-align: center;
+    font-weight: 800;
+    color: var(--gold);
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* === ACTIONS === */
+#actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -10px;
+}
+
+.text-btn {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    padding: 10px 0;
+    position: relative;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.text-btn:hover { color: var(--text); transform: translateY(-1px); }
+.text-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 5px; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.3s;
+}
+.text-btn:hover::after { width: 100%; }
+
+/* === GAME BOARD === */
+#game-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#board-perspective {
+    perspective: 1200px;
+    width: 100%;
+}
+
+#board {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--board-bg);
+    border: 8px solid #ffffff;
+    border-radius: 24px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 12px;
+    position: relative;
+    box-shadow: 
+        0 20px 60px rgba(0,0,0,0.05),
+        inset 0 2px 10px rgba(0,0,0,0.02);
+    transition: transform 0.15s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.grid-cell {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* === TILES (Corrected Position Logic) === */
+#tile-container {
+    position: absolute;
+    /* Inset matches board padding (12px) */
+    inset: 12px;
+    pointer-events: none;
+}
+
+.tile {
+    position: absolute;
+    /* Math: (BoardWidth - Padding*2 - Gap*3) / 4 */
+    /* Handled by script.js using percentages for responsiveness */
+    width: calc(25% - 9px); 
+    height: calc(25% - 9px);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+    font-size: 2.2rem;
+    transition: transform 120ms cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: var(--tile-blur);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    z-index: 10;
+}
+
+.tile-inner {
+    width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+    border-radius: inherit;
+}
+
+.tile-2 .tile-inner { background: var(--t2); color: #555; }
+.tile-4 .tile-inner { background: var(--t4); color: #555; }
+.tile-8 .tile-inner { background: var(--t8); color: #7a6e00; }
+.tile-16 .tile-inner { background: var(--t16); color: #8a5a00; }
+.tile-32 .tile-inner { background: var(--t32); color: #9a4a00; }
+.tile-64 .tile-inner { background: var(--t64); color: #a02020; }
+.tile-128 .tile-inner { background: var(--t128); color: #005a8a; font-size: 1.8rem; }
+.tile-256 .tile-inner { background: var(--t256); color: #006a64; font-size: 1.8rem; }
+.tile-512 .tile-inner { background: var(--t512); color: #4a2a8a; font-size: 1.8rem; }
+.tile-1024 .tile-inner { background: var(--t1024); color: #444; font-size: 1.5rem; }
+.tile-2048 .tile-inner { background: var(--t2048); color: #fff; font-size: 1.5rem; }
+
+/* Animations */
+@keyframes spawn {
+    0% { opacity: 0; transform: scale(0.5); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.tile-new .tile-inner { animation: spawn 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+@keyframes merge {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); box-shadow: 0 0 30px rgba(0,0,0,0.1); }
+    100% { transform: scale(1); }
+}
+
+.tile-merged .tile-inner { animation: merge 250ms ease-in-out forwards; }
+
+/* === OVERLAYS === */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+
+.overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.overlay-card {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 64px;
+    border-radius: 32px;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.1);
+}
+
+.overlay-card h2 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    color: var(--text);
+    letter-spacing: -2px;
+}
+
+.over-stats {
+    margin-bottom: 48px;
+    font-size: 1.4rem;
+    color: var(--text-dim);
+}
+
+.primary-btn {
+    background: var(--text);
+    color: white;
+    border: none;
+    padding: 20px 48px;
+    border-radius: 40px;
+    font-family: inherit;
+    font-weight: 800;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.primary-btn:hover { transform: scale(1.05); background: #000; }
+
+.hidden { display: none; }
+
+/* === FOOTER === */
+#footer {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    padding-bottom: 32px;
+    letter-spacing: 0.5px;
+}
+
+#footer strong { color: var(--gold); font-weight: 800; }
+
+@media (max-width: 450px) {
+    #app { padding: 20px; gap: 20px; }
+    .brand h1 { font-size: 2.2rem; }
+    .score-card { min-width: 80px; padding: 8px 16px; }
+    #board { gap: 8px; padding: 8px; }
+    .tile { width: calc(25% - 6px); height: calc(25% - 6px); font-size: 1.8rem; }
+    #tile-container { inset: 8px; }
+}

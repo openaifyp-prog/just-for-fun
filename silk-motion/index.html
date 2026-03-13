@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silk — 3D Abstract Motion Graphics</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <!-- Premium Glassmorphism UI -->
+    <div id="ui-overlay">
+        <aside id="control-panel">
+            <header>
+                <h1>SILK</h1>
+                <p class="subtitle">Abstract Motion Simulation</p>
+            </header>
+
+            <section class="control-group">
+                <div class="ctrl-row">
+                    <label>Flow Strength</label>
+                    <input type="range" id="flow-strength" min="0" max="100" value="50">
+                </div>
+                <div class="ctrl-row">
+                    <label>Ribbon Width</label>
+                    <input type="range" id="ribbon-width" min="1" max="20" value="8">
+                </div>
+                <div class="ctrl-row">
+                    <label>Turbulence</label>
+                    <input type="range" id="turbulence" min="0" max="100" value="30">
+                </div>
+                <div class="ctrl-row">
+                    <label>Light Intensity</label>
+                    <input type="range" id="light-intensity" min="0" max="100" value="70">
+                </div>
+            </section>
+
+            <section class="control-group">
+                <label class="group-label">Palette</label>
+                <div class="palette-selector">
+                    <button class="palette-btn active" data-palette="gold" title="Gold-Crimson" style="background: linear-gradient(135deg, #ecb613, #c0392b);"></button>
+                    <button class="palette-btn" data-palette="teal" title="Deep Sea" style="background: linear-gradient(135deg, #2a5a5a, #001a1a);"></button>
+                    <button class="palette-btn" data-palette="aurora" title="Cosmic Aurora" style="background: linear-gradient(135deg, #4f319b, #32e0c4);"></button>
+                </div>
+            </section>
+
+            <section class="actions">
+                <button id="btn-pause" class="action-btn">
+                    <span class="icon">⏸</span> <span class="btn-text">PAUSE</span>
+                </button>
+                <button id="btn-clear" class="action-btn secondary">
+                    <span class="btn-text">CLEAR CANVAS</span>
+                </button>
+                <button id="btn-export" class="action-btn secondary">
+                    <span class="btn-text">EXPORT SNAPSHOT</span>
+                </button>
+            </section>
+        </aside>
+
+        <footer id="status-bar">
+            <div class="status-item"><span id="fps-counter">60</span> <span>FPS</span></div>
+            <div class="status-item"><span id="spline-count">1,240</span> <span>Splines</span></div>
+            <div class="status-item highlight">GPU-Accelerated</div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
